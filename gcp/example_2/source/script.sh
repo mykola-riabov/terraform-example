@@ -1,21 +1,24 @@
 #!/bin/bash
 export DEBIAN_FRONTEND=noninteractive
 
+USER="<your user>"
+
 apt update -y
 apt upgrade -y
 apt install mc vim* wget curl tmux zsh* git build-essential jq snapd ufw ansible -y
-cp /home/<your user>/.downloads/.zshrc /home/<your user>/.zshrc
-chown -R <your user>:<your user> /home/<your user>/.zshrc
-cp /home/<your user>/.downloads/.zshrc /root/.zshrc
-chsh -s /bin/zsh <your user>
+cp "/home/${USER}/.downloads/.zshrc" "/home/${USER}/.zshrc"
+chown -R "${USER}:${USER}" "/home/${USER}/.zshrc"
+cp "/home/${USER}/.downloads/.zshrc" /root/.zshrc
+chsh -s /bin/zsh "${USER}"
 chsh -s /bin/zsh root
-tar -xzf /home/<your user>/.downloads/tmux.tar.gz
-tar -xzf /home/<your user>/.downloads/ansible_config.tar.gz
-cp -r /home/<your user>/.downloads/tmux/.tmux /home/<your user>/.tmux
-cp -r /home/<your user>/.downloads/tmux/.tmux.conf /home/<your user>/.tmux.conf
-cp -r /home/<your user>/.downloads/ansible_config /home/<your user>/ansible_config
-chown -R <your user>:<your user> /home/<your user>/.tmux
-chown -R <your user>:<your user> /home/<your user>/.tmux.conf
-chown -R <your user>:<your user> /home/<your user>/ansible_config
+tar -xzf "/home/${USER}/.downloads/tmux.tar.gz" -C "/home/${USER}"
+tar -xzf "/home/${USER}/.downloads/ansible_config.tar.gz" -C "/home/${USER}"
+cp -r "/home/${USER}/.downloads/tmux/.tmux" "/home/${USER}/.tmux"
+cp -r "/home/${USER}/.downloads/tmux/.tmux.conf" "/home/${USER}/.tmux.conf"
+cp -r "/home/${USER}/.downloads/ansible_config" "/home/${USER}/ansible_config"
+chown -R "${USER}:${USER}" "/home/${USER}/.tmux"
+chown -R "${USER}:${USER}" "/home/${USER}/.tmux.conf"
+chown -R "${USER}:${USER}" "/home/${USER}/ansible_config"
 reboot now
+
 
