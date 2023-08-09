@@ -1,0 +1,26 @@
+###############################Setting all host#########################################################################
+Host *
+KexAlgorithms +diffie-hellman-group14-sha1
+Protocol 2
+Compression yes
+ServerAliveInterval 60
+ServerAliveCountMax 20
+LogLevel INFO
+########################################################################################################################
+Host ubuntu-srv1
+IdentityFile ~/.ssh/id_rsa
+HostName 10.10.2.12
+Port 22
+User <your user>
+########################################################################################################################
+Host ubuntu-srv2
+IdentityFile ~/.ssh/id_rsa
+HostName 10.10.2.13
+Port 22
+User <your user>
+########################################################################################################################
+Host ubuntu-srv3
+IdentityFile ~/.ssh/id_rsa
+HostName 10.10.2.14
+Port 22
+User <your user>
