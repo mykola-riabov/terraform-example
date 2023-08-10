@@ -272,4 +272,4 @@ if [ -f /etc/zsh_command_not_found ]; then
 fi
 #=========================================== PATH
 export ANSIBLE_CONFIG=$HOME/ansible_config/srv/ansible.cfg
-export ANSIBLE_INVENTORY=$HOME/ansible_config/srv/inventory
+export ANSIBLE_INVENTORY=$HOME/ansible_config/srv/inventories/production/inventory.yaml
