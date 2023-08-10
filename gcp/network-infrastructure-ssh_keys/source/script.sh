@@ -55,6 +55,7 @@ systemctl enable containerd.service
 
 # Fix vim
 sed -i '/command! -nargs=0 -complete=command TBrowseScriptnames call tlib#cmd#TBrowseScriptnames()/s/^/"&/' /var/lib/vim/addons/plugin/02tlib.vim
+rm /var/lib/vim/addons/plugin/UltiSnips.vim
 
 # Reboot
 reboot now
