@@ -1,28 +1,36 @@
 #!/bin/bash
-export DEBIAN_FRONTEND=noninteractive
 
+# Set user and directories
 USER="<your user>"
+DOWNLOADS_DIR="/home/${USER}/.downloads"
+USER_DIR="/home/${USER}"
 
+# Update and install packages
+export DEBIAN_FRONTEND=noninteractive
 apt update -y
 apt upgrade -y
 apt install mc vim* wget curl tmux zsh* git build-essential jq snapd ufw ansible ca-certificates gnupg -y
 
-# Copy zshrc and set permissions
-cp "/home/${USER}/.downloads/.zshrc" "/home/${USER}/.zshrc"
-chown -R "${USER}:${USER}" "/home/${USER}/.zshrc"
-cp "/home/${USER}/.downloads/.zshrc" /root/.zshrc
+# Function to copy files and set ownership
+copy_files() {
+    cp "${DOWNLOADS_DIR}/${1}" "${2}"
+    chown -R "${USER}:${USER}" "${2}"
+}
 
-# Set default shell to zsh
+# Copy and set ownership for Zshrc
+copy_files ".zshrc" "${USER_DIR}/.zshrc"
+cp "${USER_DIR}/.zshrc" /root/.zshrc
+
+# Set Zsh as default shell
 chsh -s /bin/zsh "${USER}"
 chsh -s /bin/zsh root
 
-# Extract and set up tmux and ansible config
-tar -xzf "/home/${USER}/.downloads/tmux.tar.gz" -C "/home/${USER}"
-tar -xzf "/home/${USER}/.downloads/ansible_config.tar.gz" -C "/home/${USER}"
-cp -r "/home/${USER}/.downloads/tmux/.tmux" "/home/${USER}/.tmux"
-cp -r "/home/${USER}/.downloads/tmux/.tmux.conf" "/home/${USER}/.tmux.conf"
-cp -r "/home/${USER}/.downloads/ansible_config" "/home/${USER}/ansible_config"
-chown -R "${USER}:${USER}" "/home/${USER}/.tmux" "/home/${USER}/.tmux.conf" "/home/${USER}/ansible_config"
+# Extract and set up Tmux and Ansible config
+tar -xzf "${DOWNLOADS_DIR}/tmux.tar.gz" -C "${USER_DIR}"
+tar -xzf "${DOWNLOADS_DIR}/ansible_config.tar.gz" -C "${USER_DIR}"
+copy_files "tmux/.tmux" "${USER_DIR}/.tmux"
+copy_files "tmux/.tmux.conf" "${USER_DIR}/.tmux.conf"
+copy_files "ansible_config" "${USER_DIR}/ansible_config"
 
 # Docker installation
 install -m 0755 -d /etc/apt/keyrings
@@ -43,6 +51,7 @@ systemctl enable containerd.service
 
 # Reboot
 reboot now
+
 
 
 
