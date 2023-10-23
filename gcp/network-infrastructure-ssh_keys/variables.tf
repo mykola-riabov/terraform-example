@@ -167,10 +167,28 @@ type        = list(string)
 default     = ["0.0.0.0/0"]
 }
 //=================================================type=================================================================
+// 8 vCPUs, RAM 8 GiB
+variable "machine_type_large_cpu" {
+  type = string
+  default = "e2-highcpu-8"
+}
+
+// 4 vCPUs, RAM 16 GiB
+variable "machine_type_large_mem" {
+  type = string
+  default = "e2-standard-4"
+}
+
+// 8 vCPUs, RAM 32 GiB
+variable "machine_type_large_mem_cpu" {
+  type = string
+  default = "e2-standard-8"
+}
+
 // 2 vCPUs, RAM 8 GiB
 variable "machine_type_standart" {
-type = string
-default = "e2-standard-2"
+  type = string
+  default = "e2-standard-2"
 }
 
 // 2 vCPUs, RAM 1 GiB
@@ -186,8 +204,8 @@ variable "machine_type_medium" {
 }
 //=================================================image================================================================
 variable "image_ubuntu" {
-type = string
-default = "ubuntu-2204-jammy-v20230727"
+  type = string
+  default = "ubuntu-2204-jammy-v20230727"
 }
 
 variable "image_debian" {
@@ -206,8 +224,8 @@ variable "size_boot_large" {
 }
 
 variable "size_boot_standart" {
-type = string
-default     = "80"
+  type = string
+  default     = "80"
 }
 
 variable "size_boot_small" {
@@ -221,8 +239,8 @@ variable "size_boot_micro" {
 }
 
 variable "type_boot_disk" {
-type = string
-default     = "pd-ssd"
+  type = string
+  default     = "pd-ssd"
 }
 //=================================================ssh==================================================================
 variable "ssh_user" {
